@@ -16,6 +16,6 @@ After this you can run the application with auto reload for development:
 The auto reload of the server application is only happening on the server side.
 You still have to refresh on the client side.
 
-In case you want to know more about it, 
-[these instrcutions were followed...](https://actix.rs/docs/autoreload/)
+In case you want to know more about it,
+[these instructions were followed...](https://actix.rs/docs/autoreload/)
  
