@@ -1,0 +1,9 @@
+[package]
+name = "chaillot-server"
+version = "0.1.0"
+authors = ["Pascal Erb <paschelino@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+actix-web = "0.7"
+listenfd = "0.3"
