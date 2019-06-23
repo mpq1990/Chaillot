@@ -1,22 +1,61 @@
 <template>
   <div class="hello">
     <div class="holder">
-      <form @submit.prevent="addSkill">
+      <form v-on:submit.prevent="submitForm">
+        <input type="text" placeholder="Your first name..." v-model="firstName" name="firstName">
+        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+
         <input
           type="text"
-          placeholder="Enter a skill that you have..."
-          v-model="skill"
-          v-validate="'min:5'"
-          name="skill"
+          placeholder="Your last name"
+          v-model="lastName"
+          v-validate="'required'"
+          name="lastName"
+        >
+        <p class="alert" v-if="errors.has('lastName')">{{ errors.first('lastName') }}</p>
+
+        <input
+          type="text"
+          placeholder="Your date of birth YYYY-MM-DD"
+          v-model="dateOfBirth"
+          v-validate="'required|date_format:yyyy-MM-dd'"
+          name="dateOfBirth"
+        >
+        <p class="alert" v-if="errors.has('dateOfBirth')">{{ errors.first('dateOfBirth') }}</p>
+
+        <input
+          type="text"
+          placeholder="Your city of birth..."
+          v-model="cityOfBirth"
+          name="cityOfBirth"
+          v-validate="'required'"
         >
         <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+
+        <input
+          type="text"
+          placeholder="Your country of birth..."
+          v-model="countryOfBirth"
+          name="countryOfBirth"
+          v-validate="'required'"
+        >
+        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+
+        <input
+          type="text"
+          placeholder="Your native language..."
+          v-model="nativeLanguage"
+          name="nativeLanguage"
+          v-validate="'required'"
+        >
+        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+
+        <button v-on:click="submitForm">SUBMIT</button>
       </form>
 
-      <ul>
+      <!-- <ul>
         <li v-for="(data, index) in skills" :key="index">{{data.skill}}</li>
-      </ul>
-
-      <p>These are the skills you have</p>
+      </ul>-->
     </div>
   </div>
 </template>
@@ -26,16 +65,25 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      skills: [{ skill: "Vue.js" }, { skill: "Frontend developer" }],
-      skill: ""
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      cityOfBirth: "",
+      countryOfBirth: "",
+      nativeLanguage: ""
     };
   },
   methods: {
-    addSkill() {
+    submitForm() {
       this.$validator.validateAll().then(result => {
         if (result) {
-          this.skills.push({ skill: this.skill });
-          this.skill = "";
+          console.log("submitting the form");
+          console.log(this.firstName);
+          console.log(this.lastName);
+          console.log(this.dateOfBirth);
+          console.log(this.cityOfBirth);
+          console.log(this.countryOfBirth);
+          console.log(this.nativeLanguage);
         } else {
           console.log("invalid");
         }
