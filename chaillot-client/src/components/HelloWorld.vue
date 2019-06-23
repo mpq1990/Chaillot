@@ -2,8 +2,14 @@
   <div class="hello">
     <div class="holder">
       <form v-on:submit.prevent="submitForm">
-        <input type="text" placeholder="Your first name..." v-model="firstName" name="firstName">
-        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+        <input
+          type="text"
+          placeholder="Your first name..."
+          v-validate="'required'"
+          v-model="firstName"
+          name="firstName"
+        >
+        <p class="alert" v-if="errors.has('firstName')">{{ errors.first('firstName') }}</p>
 
         <input
           type="text"
@@ -30,7 +36,7 @@
           name="cityOfBirth"
           v-validate="'required'"
         >
-        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+        <p class="alert" v-if="errors.has('cityOfBirth')">{{ errors.first('cityOfBirth') }}</p>
 
         <input
           type="text"
@@ -39,7 +45,7 @@
           name="countryOfBirth"
           v-validate="'required'"
         >
-        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+        <p class="alert" v-if="errors.has('countryOfBirth')">{{ errors.first('countryOfBirth') }}</p>
 
         <input
           type="text"
@@ -48,7 +54,7 @@
           name="nativeLanguage"
           v-validate="'required'"
         >
-        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+        <p class="alert" v-if="errors.has('nativeLanguage')">{{ errors.first('nativeLanguage') }}</p>
 
         <button v-on:click="submitForm">SUBMIT</button>
       </form>
@@ -75,19 +81,25 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$validator.validateAll().then(result => {
-        if (result) {
-          console.log("submitting the form");
-          console.log(this.firstName);
-          console.log(this.lastName);
-          console.log(this.dateOfBirth);
-          console.log(this.cityOfBirth);
-          console.log(this.countryOfBirth);
-          console.log(this.nativeLanguage);
-        } else {
-          console.log("invalid");
+      this.$validator.validateAll().then(
+        result => {
+          if (result) {
+            console.log(result);
+            console.log("submitting the form");
+            console.log(this.firstName);
+            console.log(this.lastName);
+            console.log(this.dateOfBirth);
+            console.log(this.cityOfBirth);
+            console.log(this.countryOfBirth);
+            console.log(this.nativeLanguage);
+          } else {
+            console.log("invalid");
+          }
+        },
+        error => {
+          console.log(error);
         }
-      });
+      );
     }
   }
 };
