@@ -81,25 +81,19 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$validator.validateAll().then(
-        result => {
-          if (result) {
-            console.log(result);
-            console.log("submitting the form");
-            console.log(this.firstName);
-            console.log(this.lastName);
-            console.log(this.dateOfBirth);
-            console.log(this.cityOfBirth);
-            console.log(this.countryOfBirth);
-            console.log(this.nativeLanguage);
-          } else {
-            console.log("invalid");
-          }
-        },
-        error => {
-          console.log(error);
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          console.log("submitting the form");
+          console.log(this.firstName);
+          console.log(this.lastName);
+          console.log(this.dateOfBirth);
+          console.log(this.cityOfBirth);
+          console.log(this.countryOfBirth);
+          console.log(this.nativeLanguage);
+        } else {
+          console.log("invalid");
         }
-      );
+      });
     }
   }
 };
