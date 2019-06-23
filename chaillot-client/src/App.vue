@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <HelloWorld/>
+    <InputForm/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import InputForm from "@/components/InputForm.vue"; // @ is an alias to /src
 export default {
   components: {
-    HelloWorld
+    InputForm
   }
 };
 </script>
