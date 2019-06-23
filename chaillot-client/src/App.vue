@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <HelloWorld/>
   </div>
 </template>
 
@@ -14,23 +14,33 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+body {
+  background-color: #eeeeee;
+  font-family: "Montserrat", sans-serif;
+  display: grid;
+  grid-template-rows: auto;
+  justify-items: center;
+  padding-top: 50px;
+}
+body,
+html {
+  margin: 0;
+  height: 100%;
+}
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  width: 50%;
 }
-#nav {
-  padding: 30px;
+nav {
+  padding: 20px 20px 20px 0;
 }
-
-#nav a {
+nav a {
+  padding: 10px;
+  text-decoration: none;
+  background: #fff;
+  border-radius: 3px;
+  color: rgb(0, 110, 255);
   font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  margin-right: 15px;
 }
 </style>

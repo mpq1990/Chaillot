@@ -1,33 +1,92 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>Hello World!</p>
+    <div class="holder">
+      <form @submit.prevent="addSkill">
+        <input
+          type="text"
+          placeholder="Enter a skill that you have..."
+          v-model="skill"
+          v-validate="'min:5'"
+          name="skill"
+        >
+        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+      </form>
+
+      <ul>
+        <li v-for="(data, index) in skills" :key="index">{{data.skill}}</li>
+      </ul>
+
+      <p>These are the skills you have</p>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-
-@Component
-export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
-}
+<script>
+export default {
+  name: "HelloWorld",
+  data() {
+    return {
+      skills: [{ skill: "Vue.js" }, { skill: "Frontend developer" }],
+      skill: ""
+    };
+  },
+  methods: {
+    addSkill() {
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          this.skills.push({ skill: this.skill });
+          this.skill = "";
+        } else {
+          console.log("invalid");
+        }
+      });
+    }
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style  scoped>
+.holder {
+  background: #fff;
 }
 ul {
-  list-style-type: none;
+  margin: 0;
   padding: 0;
+  list-style-type: none;
 }
-li {
+
+ul li {
+  padding: 20px;
+  font-size: 1.3em;
+  background-color: #e0edf4;
+  border-left: 5px solid #3eb3f6;
+  margin-bottom: 2px;
+  color: #3e5252;
+}
+p {
+  text-align: center;
+  padding: 30px 0;
+  color: gray;
+}
+.container {
+  box-shadow: 0px 0px 40px lightgray;
+}
+
+input {
+  width: calc(100% - 40px);
+  border: 0;
+  padding: 20px;
+  font-size: 1.3em;
+  background-color: #323333;
+  color: #687f7f;
+}
+
+.alert {
+  background: #fdf2ce;
+  font-weight: bold;
   display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+  padding: 5px;
+  margin-top: -20px;
 }
 </style>
